@@ -256,108 +256,114 @@ namespace ConsoleApp12
                 }
             }
 
-            foreach (var c in input2)
+            if (input2 != null)
             {
-                if (!char.IsDigit(c) && c != '-' && c != '+')
+                foreach (var c in input2)
                 {
-                    isValidInteger2 = false;
-                    break;
+                    if (!char.IsDigit(c) && c != '-' && c != '+')
+                    {
+                        isValidInteger2 = false;
+                        break;
+                    }
                 }
-            }
 
-            if (isValidInteger1 && isValidInteger2)
-            {
-                var num1 = int.Parse(input1);
-                var num2 = int.Parse(input2);
-
-                WriteLine("Select a bitwise operation: & (AND), | (OR), ^ (XOR), ~ (NOT), << (LEFT SHIFT), >> (RIGHT SHIFT)");
-                var operation = ReadLine();
-
-                var result = 0;
-                var validOperation = true;
-
-                switch (operation)
+                if (isValidInteger1 && isValidInteger2)
                 {
-                    case "&":
-                        result = num1 & num2;
-                        WriteLine($"{num1} & {num2} = {result}");
-                        break;
-                    case "|":
-                        result = num1 | num2;
-                        WriteLine($"{num1} | {num2} = {result}");
-                        break;
-                    case "^":
-                        result = num1 ^ num2;
-                        WriteLine($"{num1} ^ {num2} = {result}");
-                        break;
-                    case "~":
-                        result = ~num1;
-                        WriteLine($"~{num1} = {result}");
-                        break;
-                    case "<<":
-                        Write("Enter the number of positions to shift left: ");
-                        var shiftLeft = ReadLine();
-                        var isValidShiftLeft = true;
+                    var num1 = int.Parse(input1);
+                    var num2 = int.Parse(input2);
 
-                        foreach (var c in shiftLeft)
-                        {
-                            if (!char.IsDigit(c) && c != '-' && c != '+')
+                    WriteLine(
+                        "Select a bitwise operation: & (AND), | (OR), ^ (XOR), ~ (NOT), << (LEFT SHIFT), >> (RIGHT SHIFT)");
+                    var operation = ReadLine();
+
+                    var result = 0;
+                    var validOperation = true;
+
+                    switch (operation)
+                    {
+                        case "&":
+                            result = num1 & num2;
+                            WriteLine($"{num1} & {num2} = {result}");
+                            break;
+                        case "|":
+                            result = num1 | num2;
+                            WriteLine($"{num1} | {num2} = {result}");
+                            break;
+                        case "^":
+                            result = num1 ^ num2;
+                            WriteLine($"{num1} ^ {num2} = {result}");
+                            break;
+                        case "~":
+                            result = ~num1;
+                            WriteLine($"~{num1} = {result}");
+                            break;
+                        case "<<":
+                            Write("Enter the number of positions to shift left: ");
+                            var shiftLeft = ReadLine();
+                            var isValidShiftLeft = true;
+
+                            foreach (var c in shiftLeft)
                             {
-                                isValidShiftLeft = false;
-                                break;
+                                if (!char.IsDigit(c) && c != '-' && c != '+')
+                                {
+                                    isValidShiftLeft = false;
+                                    break;
+                                }
                             }
-                        }
 
-                        if (isValidShiftLeft)
-                        {
-                            result = num1 << int.Parse(shiftLeft);
-                            WriteLine($"{num1} << {shiftLeft} = {result}");
-                        }
-                        else
-                        {
-                            WriteLine("Invalid shift amount. Please enter a valid integer.");
-                            validOperation = false;
-                        }
-                        break;
-                    case ">>":
-                        Write("Enter the number of positions to shift right: ");
-                        var shiftRight = ReadLine();
-                        var isValidShiftRight = true;
-
-                        foreach (var c in shiftRight)
-                        {
-                            if (!char.IsDigit(c) && c != '-' && c != '+')
+                            if (isValidShiftLeft)
                             {
-                                isValidShiftRight = false;
-                                break;
+                                result = num1 << int.Parse(shiftLeft);
+                                WriteLine($"{num1} << {shiftLeft} = {result}");
                             }
-                        }
+                            else
+                            {
+                                WriteLine("Invalid shift amount. Please enter a valid integer.");
+                                validOperation = false;
+                            }
 
-                        if (isValidShiftRight)
-                        {
-                            result = num1 >> int.Parse(shiftRight);
-                            WriteLine($"{num1} >> {shiftRight} = {result}");
-                        }
-                        else
-                        {
-                            WriteLine("Invalid shift amount. Please enter a valid integer.");
+                            break;
+                        case ">>":
+                            Write("Enter the number of positions to shift right: ");
+                            var shiftRight = ReadLine();
+                            var isValidShiftRight = true;
+
+                            foreach (var c in shiftRight)
+                            {
+                                if (!char.IsDigit(c) && c != '-' && c != '+')
+                                {
+                                    isValidShiftRight = false;
+                                    break;
+                                }
+                            }
+
+                            if (isValidShiftRight)
+                            {
+                                result = num1 >> int.Parse(shiftRight);
+                                WriteLine($"{num1} >> {shiftRight} = {result}");
+                            }
+                            else
+                            {
+                                WriteLine("Invalid shift amount. Please enter a valid integer.");
+                                validOperation = false;
+                            }
+
+                            break;
+                        default:
+                            WriteLine("Invalid operation.");
                             validOperation = false;
-                        }
-                        break;
-                    default:
-                        WriteLine("Invalid operation.");
-                        validOperation = false;
-                        break;
-                }
+                            break;
+                    }
 
-                if (!validOperation)
-                {
-                    WriteLine("Operation failed. Please try again.");
+                    if (!validOperation)
+                    {
+                        WriteLine("Operation failed. Please try again.");
+                    }
                 }
-            }
-            else
-            {
-                WriteLine("Invalid input. Please enter valid integers.");
+                else
+                {
+                    WriteLine("Invalid input. Please enter valid integers.");
+                }
             }
 
             WriteLine("Press Enter to return to the main menu...");
