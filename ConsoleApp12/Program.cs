@@ -18,7 +18,7 @@ namespace ConsoleApp12
                 WriteLine("4. Bitwise Game");
                 WriteLine("5. Exit");
 
-                string choice = ReadLine();
+                string? choice = ReadLine();
 
                 switch (choice)
                 {
@@ -53,7 +53,7 @@ namespace ConsoleApp12
 
         static void NumberGuessingGame()
         {
-            const int SECRET_NUMBER = 7;
+            const int secretNumber = 7;
             bool isGuessedCorrectly = false;
 
             Clear();
@@ -62,7 +62,7 @@ namespace ConsoleApp12
             for (int attempt = 1; attempt <= 3; attempt++)
             {
                 Write($"Attempt {attempt}: Enter your guess: ");
-                string input = ReadLine();
+                string? input = ReadLine();
 
                 bool isValidInteger = true;
                 foreach (char c in input)
@@ -80,7 +80,7 @@ namespace ConsoleApp12
                 {
                     var userGuess = int.Parse(input);
 
-                    if (userGuess == SECRET_NUMBER)
+                    if (userGuess == secretNumber)
                     {
                         WriteLine("Congratulations! You guessed the number correctly.");
                         isGuessedCorrectly = true;
@@ -120,91 +120,96 @@ namespace ConsoleApp12
             bool decimalFound = false;
 
 
-
-            foreach (char c in input1)
+            if (input1 != null)
             {
-                if (c == '.')
+                foreach (char c in input1)
                 {
-                    if (decimalFound)
+                    if (c == '.')
+                    {
+                        if (decimalFound)
+                        {
+                            isValidDouble1 = false;
+                            break;
+                        }
+
+                        decimalFound = true;
+                    }
+                    else if (!char.IsDigit(c) && c != '-' && c != '+')
                     {
                         isValidDouble1 = false;
                         break;
                     }
-                    decimalFound = true;
                 }
-                else if (!char.IsDigit(c) && c != '-' && c != '+')
-                {
-                    isValidDouble1 = false;
-                    break;
-                }
-            }
 
-            decimalFound = false;
-            foreach (char c in input2)
-            {
-                if (c == '.')
+                decimalFound = false;
+                foreach (char c in input2)
                 {
-                    if (decimalFound)
+                    if (c == '.')
+                    {
+                        if (decimalFound)
+                        {
+                            isValidDouble2 = false;
+                            break;
+                        }
+
+                        decimalFound = true;
+                    }
+                    else if (!char.IsDigit(c) && c != '-' && c != '+')
                     {
                         isValidDouble2 = false;
                         break;
                     }
-                    decimalFound = true;
                 }
-                else if (!char.IsDigit(c) && c != '-' && c != '+')
+
+                if (isValidDouble1 && isValidDouble2)
                 {
-                    isValidDouble2 = false;
-                    break;
-                }
-            }
+                    double num1 = double.Parse(input1);
+                    double num2 = double.Parse(input2);
 
-            if (isValidDouble1 && isValidDouble2)
-            {
-                double num1 = double.Parse(input1);
-                double num2 = double.Parse(input2);
+                    WriteLine("Select an operation: +, -, *, /");
+                    string operation = ReadLine();
 
-                WriteLine("Select an operation: +, -, *, /");
-                string operation = ReadLine();
+                    double result = 0;
+                    bool validOperation = true;
 
-                double result = 0;
-                bool validOperation = true;
+                    switch (operation)
+                    {
+                        case "+":
+                            result = num1 + num2;
+                            break;
+                        case "-":
+                            result = num1 - num2;
+                            break;
+                        case "*":
+                            result = num1 * num2;
+                            break;
+                        case "/":
+                            if (num2 != 0)
+                            {
+                                result = num1 / num2;
+                            }
+                            else
+                            {
+                                WriteLine("Error: Division by zero.");
+                                validOperation = false;
+                            }
 
-                switch (operation)
-                {
-                    case "+":
-                        result = num1 + num2;
-                        break;
-                    case "-":
-                        result = num1 - num2;
-                        break;
-                    case "*":
-                        result = num1 * num2;
-                        break;
-                    case "/":
-                        if (num2 != 0)
-                        {
-                            result = num1 / num2;
-                        }
-                        else
-                        {
-                            WriteLine("Error: Division by zero.");
+                            break;
+                        default:
+                            WriteLine("Invalid operation.");
                             validOperation = false;
-                        }
-                        break;
-                    default:
-                        WriteLine("Invalid operation.");
-                        validOperation = false;
-                        break;
-                }
+                            break;
+                    }
 
-                if (validOperation)
-                {
-                    WriteLine($"Result: {result}"); // $"BFDBDFBADFB {}"
+                    if (validOperation)
+                    {
+                        WriteLine($"Result: {result}"); // $"BFDBDFBADFB {}"
+                    }
                 }
-            }
-            else
-            {
-                WriteLine("Invalid input. Please enter valid numbers.");
+                else
+                {
+                    WriteLine("Invalid input. Please enter valid numbers.");
+                }
             }
 
             WriteLine("Press Enter to return to the main menu...");
@@ -302,24 +307,27 @@ namespace ConsoleApp12
                             var shiftLeft = ReadLine();
                             var isValidShiftLeft = true;
 
-                            foreach (var c in shiftLeft)
+                            if (shiftLeft != null)
                             {
-                                if (!char.IsDigit(c) && c != '-' && c != '+')
+                                foreach (var c in shiftLeft)
                                 {
-                                    isValidShiftLeft = false;
-                                    break;
+                                    if (!char.IsDigit(c) && c != '-' && c != '+')
+                                    {
+                                        isValidShiftLeft = false;
+                                        break;
+                                    }
                                 }
-                            }
 
-                            if (isValidShiftLeft)
-                            {
-                                result = num1 << int.Parse(shiftLeft);
-                                WriteLine($"{num1} << {shiftLeft} = {result}");
-                            }
-                            else
-                            {
-                                WriteLine("Invalid shift amount. Please enter a valid integer.");
-                                validOperation = false;
+                                if (isValidShiftLeft)
+                                {
+                                    result = num1 << int.Parse(shiftLeft);
+                                    WriteLine($"{num1} << {shiftLeft} = {result}");
+                                }
+                                else
+                                {
+                                    WriteLine("Invalid shift amount. Please enter a valid integer.");
+                                    validOperation = false;
+                                }
                             }
 
                             break;
