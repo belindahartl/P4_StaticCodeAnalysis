@@ -1,22 +1,24 @@
 ﻿
+using static System.Console;
+
 namespace ConsoleApp12
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
         Start:
             while (true)
             {
-                Console.Clear();
-                Console.WriteLine("Select a game:");
-                Console.WriteLine("1. Number Guessing Game");
-                Console.WriteLine("2. Simple Calculator");
-                Console.WriteLine("3. Word Reversal Game");
-                Console.WriteLine("4. Bitwise Game");
-                Console.WriteLine("5. Exit");
+                Clear();
+                WriteLine("Select a game:");
+                WriteLine("1. Number Guessing Game");
+                WriteLine("2. Simple Calculator");
+                WriteLine("3. Word Reversal Game");
+                WriteLine("4. Bitwise Game");
+                WriteLine("5. Exit");
 
-                string choice = Console.ReadLine();
+                string choice = ReadLine();
 
                 switch (choice)
                 {
@@ -37,13 +39,13 @@ namespace ConsoleApp12
                         goto Start;
 
                     case "5":
-                        Console.WriteLine("Exiting...");
+                        WriteLine("Exiting...");
                         return;
 
                     default:
-                        Console.WriteLine("Invalid choice. Please enter a number between 1 and 5.");
-                        Console.WriteLine("Press any key to continue...");
-                        Console.ReadKey();
+                        WriteLine("Invalid choice. Please enter a number between 1 and 5.");
+                        WriteLine("Press any key to continue...");
+                        ReadKey();
                         goto Start;
                 }
             }
@@ -54,13 +56,13 @@ namespace ConsoleApp12
             const int SECRET_NUMBER = 7;
             bool isGuessedCorrectly = false;
 
-            Console.Clear();
-            Console.WriteLine("Guess the secret number between 1 and 10");
+            Clear();
+            WriteLine("Guess the secret number between 1 and 10");
 
             for (int attempt = 1; attempt <= 3; attempt++)
             {
-                Console.Write($"Attempt {attempt}: Enter your guess: ");
-                string input = Console.ReadLine();
+                Write($"Attempt {attempt}: Enter your guess: ");
+                string input = ReadLine();
 
                 bool isValidInteger = true;
                 foreach (char c in input)
@@ -80,38 +82,38 @@ namespace ConsoleApp12
 
                     if (userGuess == SECRET_NUMBER)
                     {
-                        Console.WriteLine("Congratulations! You guessed the number correctly.");
+                        WriteLine("Congratulations! You guessed the number correctly.");
                         isGuessedCorrectly = true;
                         break;
                     }
                     else
                     {
-                        Console.WriteLine("Incorrect guess. Try again.");
+                        WriteLine("Incorrect guess. Try again.");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Invalid input. Please enter a valid integer.");
+                    WriteLine("Invalid input. Please enter a valid integer.");
                 }
             }
 
             if (!isGuessedCorrectly)
             {
-                Console.WriteLine("Sorry, you did not guess the number. The secret number was 7.");
+                WriteLine("Sorry, you did not guess the number. The secret number was 7.");
             }
 
-            Console.WriteLine("Press Enter to return to the main menu...");
-            Console.ReadLine();
+            WriteLine("Press Enter to return to the main menu...");
+            ReadLine();
         }
         static void SimpleCalculator()
         {
-            Console.Clear();
-            Console.WriteLine("Simple Calculator");
+            Clear();
+            WriteLine("Simple Calculator");
 
-            Console.Write("Enter the first number: ");
-            string input1 = Console.ReadLine();
-            Console.Write("Enter the second number: ");
-            string input2 = Console.ReadLine();
+            Write("Enter the first number: ");
+            string input1 = ReadLine();
+            Write("Enter the second number: ");
+            string input2 = ReadLine();
 
             bool isValidDouble1 = true;
             bool isValidDouble2 = true;
@@ -161,8 +163,8 @@ namespace ConsoleApp12
                 double num1 = double.Parse(input1);
                 double num2 = double.Parse(input2);
 
-                Console.WriteLine("Select an operation: +, -, *, /");
-                string operation = Console.ReadLine();
+                WriteLine("Select an operation: +, -, *, /");
+                string operation = ReadLine();
 
                 double result = 0;
                 bool validOperation = true;
@@ -185,36 +187,36 @@ namespace ConsoleApp12
                         }
                         else
                         {
-                            Console.WriteLine("Error: Division by zero.");
+                            WriteLine("Error: Division by zero.");
                             validOperation = false;
                         }
                         break;
                     default:
-                        Console.WriteLine("Invalid operation.");
+                        WriteLine("Invalid operation.");
                         validOperation = false;
                         break;
                 }
 
                 if (validOperation)
                 {
-                    Console.WriteLine($"Result: {result}"); // $"BFDBDFBADFB {}"
+                    WriteLine($"Result: {result}"); // $"BFDBDFBADFB {}"
                 }
             }
             else
             {
-                Console.WriteLine("Invalid input. Please enter valid numbers.");
+                WriteLine("Invalid input. Please enter valid numbers.");
             }
 
-            Console.WriteLine("Press Enter to return to the main menu...");
-            Console.ReadLine();
+            WriteLine("Press Enter to return to the main menu...");
+            ReadLine();
         }
         static void WordReversalGame()
         {
-            Console.Clear();
-            Console.WriteLine("Word Reversal Game");
+            Clear();
+            WriteLine("Word Reversal Game");
 
-            Console.Write("Enter a word to reverse: ");
-            string word = Console.ReadLine();
+            Write("Enter a word to reverse: ");
+            string word = ReadLine();
 
             if (!string.IsNullOrEmpty(word))
             {
@@ -222,30 +224,30 @@ namespace ConsoleApp12
                 Array.Reverse(charArray);
                 string reversedWord = new string(charArray);
 
-                Console.WriteLine($"Reversed word: {reversedWord}");
+                WriteLine($"Reversed word: {reversedWord}");
             }
             else
             {
-                Console.WriteLine("Invalid input. Please enter a non-empty word.");
+                WriteLine("Invalid input. Please enter a non-empty word.");
             }
 
-            Console.WriteLine("Press Enter to return to the main menu...");
-            Console.ReadLine();
+            WriteLine("Press Enter to return to the main menu...");
+            ReadLine();
         }
         static void BitwiseGame()
         {
-            Console.Clear();
-            Console.WriteLine("Bitwise Game");
+            Clear();
+            WriteLine("Bitwise Game");
 
-            Console.Write("Enter the first integer: ");
-            string input1 = Console.ReadLine();
-            Console.Write("Enter the second integer: ");
-            string input2 = Console.ReadLine();
+            Write("Enter the first integer: ");
+            var input1 = ReadLine();
+            Write("Enter the second integer: ");
+            var input2 = ReadLine();
 
-            bool isValidInteger1 = true;
-            bool isValidInteger2 = true;
+            var isValidInteger1 = true;
+            var isValidInteger2 = true;
 
-            foreach (char c in input1)
+            foreach (var c in input1)
             {
                 if (!char.IsDigit(c) && c != '-' && c != '+')
                 {
@@ -254,7 +256,7 @@ namespace ConsoleApp12
                 }
             }
 
-            foreach (char c in input2)
+            foreach (var c in input2)
             {
                 if (!char.IsDigit(c) && c != '-' && c != '+')
                 {
@@ -265,39 +267,39 @@ namespace ConsoleApp12
 
             if (isValidInteger1 && isValidInteger2)
             {
-                int num1 = int.Parse(input1);
-                int num2 = int.Parse(input2);
+                var num1 = int.Parse(input1);
+                var num2 = int.Parse(input2);
 
-                Console.WriteLine("Select a bitwise operation: & (AND), | (OR), ^ (XOR), ~ (NOT), << (LEFT SHIFT), >> (RIGHT SHIFT)");
-                string operation = Console.ReadLine();
+                WriteLine("Select a bitwise operation: & (AND), | (OR), ^ (XOR), ~ (NOT), << (LEFT SHIFT), >> (RIGHT SHIFT)");
+                var operation = ReadLine();
 
-                int result = 0;
-                bool validOperation = true;
+                var result = 0;
+                var validOperation = true;
 
                 switch (operation)
                 {
                     case "&":
                         result = num1 & num2;
-                        Console.WriteLine($"{num1} & {num2} = {result}");
+                        WriteLine($"{num1} & {num2} = {result}");
                         break;
                     case "|":
                         result = num1 | num2;
-                        Console.WriteLine($"{num1} | {num2} = {result}");
+                        WriteLine($"{num1} | {num2} = {result}");
                         break;
                     case "^":
                         result = num1 ^ num2;
-                        Console.WriteLine($"{num1} ^ {num2} = {result}");
+                        WriteLine($"{num1} ^ {num2} = {result}");
                         break;
                     case "~":
                         result = ~num1;
-                        Console.WriteLine($"~{num1} = {result}");
+                        WriteLine($"~{num1} = {result}");
                         break;
                     case "<<":
-                        Console.Write("Enter the number of positions to shift left: ");
-                        string shiftLeft = Console.ReadLine();
-                        bool isValidShiftLeft = true;
+                        Write("Enter the number of positions to shift left: ");
+                        var shiftLeft = ReadLine();
+                        var isValidShiftLeft = true;
 
-                        foreach (char c in shiftLeft)
+                        foreach (var c in shiftLeft)
                         {
                             if (!char.IsDigit(c) && c != '-' && c != '+')
                             {
@@ -309,20 +311,20 @@ namespace ConsoleApp12
                         if (isValidShiftLeft)
                         {
                             result = num1 << int.Parse(shiftLeft);
-                            Console.WriteLine($"{num1} << {shiftLeft} = {result}");
+                            WriteLine($"{num1} << {shiftLeft} = {result}");
                         }
                         else
                         {
-                            Console.WriteLine("Invalid shift amount. Please enter a valid integer.");
+                            WriteLine("Invalid shift amount. Please enter a valid integer.");
                             validOperation = false;
                         }
                         break;
                     case ">>":
-                        Console.Write("Enter the number of positions to shift right: ");
-                        string shiftRight = Console.ReadLine();
-                        bool isValidShiftRight = true;
+                        Write("Enter the number of positions to shift right: ");
+                        var shiftRight = ReadLine();
+                        var isValidShiftRight = true;
 
-                        foreach (char c in shiftRight)
+                        foreach (var c in shiftRight)
                         {
                             if (!char.IsDigit(c) && c != '-' && c != '+')
                             {
@@ -334,32 +336,32 @@ namespace ConsoleApp12
                         if (isValidShiftRight)
                         {
                             result = num1 >> int.Parse(shiftRight);
-                            Console.WriteLine($"{num1} >> {shiftRight} = {result}");
+                            WriteLine($"{num1} >> {shiftRight} = {result}");
                         }
                         else
                         {
-                            Console.WriteLine("Invalid shift amount. Please enter a valid integer.");
+                            WriteLine("Invalid shift amount. Please enter a valid integer.");
                             validOperation = false;
                         }
                         break;
                     default:
-                        Console.WriteLine("Invalid operation.");
+                        WriteLine("Invalid operation.");
                         validOperation = false;
                         break;
                 }
 
                 if (!validOperation)
                 {
-                    Console.WriteLine("Operation failed. Please try again.");
+                    WriteLine("Operation failed. Please try again.");
                 }
             }
             else
             {
-                Console.WriteLine("Invalid input. Please enter valid integers.");
+                WriteLine("Invalid input. Please enter valid integers.");
             }
 
-            Console.WriteLine("Press Enter to return to the main menu...");
-            Console.ReadLine();
+            WriteLine("Press Enter to return to the main menu...");
+            ReadLine();
         }
     }
 }
